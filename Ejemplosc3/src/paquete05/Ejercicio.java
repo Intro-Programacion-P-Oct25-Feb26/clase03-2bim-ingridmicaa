@@ -18,40 +18,48 @@ public class Ejercicio {
         Scanner entrada = new Scanner(System.in);
 
         String[] estaciones = new String[5];
-        double[][] produccion = new double[5][13];
-        double[] totalProduccion = new double[5];
-
-        for (int f = 0; f < estaciones.length; f++) {
-            System.out.println("Ingrese el nombre del encargado de la estación");
-            estaciones[f] = entrada.nextLine();
-
-        }
-        for (int i = 0; i < produccion.length; i++) {
-
-            System.out.printf("Ingrese el ingreso mensual de: %s\n", estaciones);
-            for (int j = 1; j < produccion[i].length; j++) {
-
-                System.out.printf("Mes %s: $", j);
-
-                produccion[i][j] = entrada.nextDouble();
-                totalProduccion[i] = totalProduccion[i] + produccion[i][j];
-            }
-            entrada.nextLine();
-
-        }
+        double[][] produccion = new double[5][12];
+        double m = 0;
         int indice = 0;
-        for (int i = 1; i < 5; i++) {
-            if (totalProduccion[i] > totalProduccion[indice]) {
-                indice = i;
+        double[] total = new double[5];
+
+        for (int i = 0; i < estaciones.length; i++) {
+            System.out.printf("Ingrese el nombre del encargado de la estación %d: ", i + 1);
+            estaciones[i] = entrada.nextLine();
+
+            total[i] = 0;
+        }
+
+        for (int j = 0; j < produccion.length; j++) {
+            System.out.printf("Producción mensual para %s:\n", estaciones[j]);
+
+            for (int cl = 0; cl < produccion[j].length; cl++) {
+                System.out.printf("Mes %d: $", cl + 1);
+                produccion[j][cl] = entrada.nextDouble();
+
+                total[j] = total[j] + produccion[j][cl];
             }
-        }
-        System.out.printf("Análisis de Producción\nEstación\n");
 
-        for (int i = 0; i < 5; i++) {
-            System.out.printf(
-                    "Nombre Estación ", i
-                    + " - Total Producción: $ " + totalProduccion[i]);
+            entrada.nextLine();
         }
+        for (int f = 0; f < produccion.length; f++) {
+            if (total[f] > m) {
+
+                m = total[f];
+                indice = f;
+            }
+
+        }
+        for (int fila = 0; fila < produccion.length; fila++) {
+            System.out.println(estaciones[fila] + " - Total Producción: $ "
+                    + total[fila]);
+        }
+
+        System.out.printf("\nEstación más productiva: %s"
+                + "\nEncargado de la estación: %s"
+                + "\nCantidad de la estación más productiva: $ %.2f ", estaciones[indice],
+                estaciones[indice],
+                m);
+
     }
-
 }
