@@ -19,7 +19,7 @@ public class Ejercicio {
 
         String[] estaciones = new String[5];
         double[][] produccion = new double[5][12];
-        double m = 0;
+        double i = 0;
         int indice = 0;
         double[] total = new double[5];
 
@@ -43,9 +43,9 @@ public class Ejercicio {
             entrada.nextLine();
         }
         for (int f = 0; f < produccion.length; f++) {
-            if (total[f] > m) {
+            if (total[f] > i) {
 
-                m = total[f];
+                i = total[f];
                 indice = f;
             }
 
@@ -59,7 +59,7 @@ public class Ejercicio {
                 + "\nEncargado de la estación: %s"
                 + "\nCantidad de la estación más productiva: $ %.2f ", estaciones[indice],
                 estaciones[indice],
-                m);
+                i);
 
     }
 }
